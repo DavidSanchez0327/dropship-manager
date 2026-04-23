@@ -6,10 +6,15 @@ const CATEGORIES = [
   'Juguetes', 'Mascotas', 'Automotriz', 'Herramientas', 'Otro'
 ]
 
+const DROPSHIPPER = [
+  'Marcela', 'Vanessa', 'Cristhian'
+]
+
 const EMPTY = {
   title: '',
   description: '',
   provider: '',
+  dropshipper: '',
   dropi_link: '',
   sku: '',
   dropi_id: '',
@@ -111,6 +116,21 @@ export default function ProductForm({ product, onSave, onClose, loading }) {
                   placeholder="Nombre del proveedor"
                   required
                 />
+              </div>
+
+              {/* Dropshipper */}
+              <div className="form-group">
+                <label className="form-label">Dropshipper</label>
+                <select
+                  className="form-select"
+                  value={form.dropshipper}
+                  onChange={set('dropshipper')}
+                >
+                  <option value="">Seleccionar...</option>
+                  {DROPSHIPPER.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
               </div>
 
               {/* Categoría */}
