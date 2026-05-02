@@ -27,6 +27,7 @@ build/
 .vscode/
 .idea/
 .claude/
+documentation/
 
 # Archivos temporales
 *.tmp
