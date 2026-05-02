@@ -9,7 +9,7 @@ import { useToast } from '../context/ToastContext'
 
 const CATEGORIES = ['', 'Electrónica', 'Moda', 'Hogar', 'Belleza', 'Deportes', 'Juguetes', 'Mascotas', 'Automotriz', 'Herramientas', 'Otro']
 
-export default function Products() {
+export default function Products({ onCountChange, onNavigate }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -19,6 +19,8 @@ export default function Products() {
   const [editProduct, setEditProduct] = useState(null)
   const [viewProduct, setViewProduct] = useState(null)
   const { showToast } = useToast()
+
+  useEffect(() => { onCountChange?.(products.length) }, [products, onCountChange])
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -95,7 +97,7 @@ export default function Products() {
           <button className="btn btn-ghost" onClick={load} title="Refrescar">
             <RefreshCw size={14} />
           </button>
-          <button className="btn btn-primary" onClick={() => { setEditProduct(null); setShowForm(true) }}>
+          <button className="btn btn-primary" onClick={() => onNavigate('ai-uploader')}>
             <Plus size={15} /> Nuevo producto
           </button>
         </div>
@@ -140,7 +142,7 @@ export default function Products() {
               : 'Agrega tu primer producto haciendo clic en "Nuevo producto".'}
           </p>
           {!search && !category && (
-            <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => setShowForm(true)}>
+            <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => onNavigate('ai-uploader')}>
               <Plus size={15} /> Agregar primer producto
             </button>
           )}

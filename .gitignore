@@ -5,6 +5,8 @@ node_modules/
 .env
 .env.*
 !.env.example
+BACKEND_README.md
+FRONTEND_README.md
 
 # Logs
 logs
@@ -24,6 +26,7 @@ build/
 # Archivos de configuración local
 .vscode/
 .idea/
+.claude/
 
 # Archivos temporales
 *.tmp

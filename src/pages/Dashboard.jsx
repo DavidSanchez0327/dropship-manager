@@ -28,7 +28,7 @@ export default function Dashboard({ onNavigate }) {
           <h1 className="page-title">Dashboard</h1>
           <p className="page-subtitle">Resumen de tu catálogo de dropshipping</p>
         </div>
-        <button className="btn btn-primary" onClick={() => onNavigate('products')}>
+        <button className="btn btn-primary" onClick={() => onNavigate('ai-uploader')}>
           <Plus size={14} /> Nuevo producto
         </button>
       </div>
@@ -74,8 +74,8 @@ export default function Dashboard({ onNavigate }) {
             </button>
           </div>
         ) : (
-          <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div className="card dashboard-table-wrap" style={{ padding: 0, overflow: 'hidden' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 520 }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border)' }}>
                   {['Título', 'Proveedor', 'Categoría', 'SKU', 'ID Dropi'].map((h) => (
