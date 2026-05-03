@@ -103,7 +103,7 @@ export default function AIUploader() {
       inputForm.provider   && `Proveedor: ${inputForm.provider}`,
       inputForm.dropshipper   && `Dropshipper: ${inputForm.dropshipper}`,
       inputForm.sku        && `SKU: ${inputForm.sku}`,
-      inputForm.dropi_id   && `ID en Dropi: ${inputForm.dropi_id}`,
+      inputForm.producto_id_dropi && `ID en Dropi: ${inputForm.producto_id_dropi}`,
       inputForm.dropi_link && `Link en Dropi: ${inputForm.dropi_link}`,
       inputForm.raw_info   && `Información del producto: ${inputForm.raw_info}`,
     ].filter(Boolean).join('\n')
@@ -153,7 +153,6 @@ export default function AIUploader() {
         provider:         inputForm.provider         || '',
         dropshipper:      inputForm.dropshipper      || '',
         sku:              inputForm.sku              || '',
-        dropi_id:         inputForm.dropi_id         || '',
         dropi_link:       inputForm.dropi_link       || '',
         precio_proveedor:  inputForm.precio_proveedor  ? parseFloat(inputForm.precio_proveedor) : null,
         precio_venta:      inputForm.precio_venta      ? parseFloat(inputForm.precio_venta)     : null,
@@ -280,6 +279,7 @@ export default function AIUploader() {
                 </select>
               </div>
             <div className="form-group">
+              <br/>
               <label className="form-label">Proveedor<span className="form-required">*</span></label>
               <input className="form-input" value={inputForm.provider} onChange={setIn('provider')} placeholder="Nombre del proveedor en Dropi" />
             </div>
@@ -294,12 +294,8 @@ export default function AIUploader() {
               </div>
               <div className="form-group">
                 <label className="form-label">ID en Dropi</label>
-                <input className="form-input" value={inputForm.dropi_id} onChange={setIn('dropi_id')} placeholder="DP5523" />
+                <input className="form-input" value={inputForm.producto_id_dropi} onChange={setIn('producto_id_dropi')} placeholder="DP5523" />
               </div>
-            </div>
-            <div className="form-group" style={{ marginBottom: 10 }}>
-              <label className="form-label">Producto ID Dropi</label>
-              <input className="form-input" value={inputForm.producto_id_dropi} onChange={setIn('producto_id_dropi')} placeholder="Ej: PROD-123456" />
             </div>
             <div className="form-group" style={{ marginBottom: 10 }}>
               <label className="form-label">Link del producto en Dropi</label>
@@ -474,8 +470,7 @@ export default function AIUploader() {
               ['Dropshipper',      preview.dropshipper,      false],
               ['Proveedor',        preview.provider,         false],
               ['SKU',              preview.sku,              true],
-              ['ID Dropi',         preview.dropi_id,         true],
-              ['Producto ID Dropi',preview.producto_id_dropi,true],
+              ['ID Dropi',         preview.producto_id_dropi,true],
               ['Link Dropi',       preview.dropi_link,       false],
             ].map(([label, value, mono]) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 8, gap: 12 }}>
@@ -562,7 +557,7 @@ export default function AIUploader() {
               ['Categoría', saved?.category, false],
               ['Proveedor', saved?.provider, false],
               ['SKU',       saved?.sku,      true],
-              ['ID Dropi',  saved?.dropi_id, true],
+              ['ID Dropi',  saved?.producto_id_dropi, true],
               ['ID en BD',  saved?.id,       true],
             ].map(([label, value, mono]) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>

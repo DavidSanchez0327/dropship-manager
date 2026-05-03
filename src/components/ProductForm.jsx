@@ -162,17 +162,6 @@ export default function ProductForm({ product, onSave, onClose, loading }) {
                 />
               </div>
 
-              {/* ID Dropi */}
-              <div className="form-group">
-                <label className="form-label">ID en Dropi</label>
-                <input
-                  className="form-input"
-                  value={form.dropi_id}
-                  onChange={set('dropi_id')}
-                  placeholder="ID del producto en Dropi"
-                />
-              </div>
-
               {/* Precio proveedor */}
               <div className="form-group">
                 <label className="form-label">Precio proveedor (COP)</label>

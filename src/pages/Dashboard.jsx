@@ -109,7 +109,7 @@ export default function Dashboard({ onNavigate }) {
                       ) : '—'}
                     </td>
                     <td style={{ padding: '12px 16px', fontSize: 12, fontFamily: 'monospace', color: 'var(--text-muted)' }}>{p.sku || '—'}</td>
-                    <td style={{ padding: '12px 16px', fontSize: 12, fontFamily: 'monospace', color: 'var(--text-muted)' }}>{p.dropi_id || '—'}</td>
+                    <td style={{ padding: '12px 16px', fontSize: 12, fontFamily: 'monospace', color: 'var(--text-muted)' }}>{p.producto_id_dropi || '—'}</td>
                   </tr>
                 ))}
               </tbody>

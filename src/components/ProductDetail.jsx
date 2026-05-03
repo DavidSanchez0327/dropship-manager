@@ -99,13 +99,6 @@ export default function ProductDetail({ product, onClose, onEdit, onDelete }) {
                 </div>
               )}
 
-              {product.dropi_id && (
-                <div className="detail-field">
-                  <span className="detail-field-label">ID en Dropi</span>
-                  <code style={{ fontSize: 13, color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{product.dropi_id}</code>
-                </div>
-              )}
-
               {product.producto_id_dropi && (
                 <div className="detail-field">
                   <span className="detail-field-label">Producto ID Dropi</span>
