@@ -178,8 +178,22 @@ export default function Products({ onCountChange, onNavigate }) {
                     )}
                   </div>
                 )}
+                {(p.precio_proveedor || p.precio_venta) && (
+                  <div style={{ display: 'flex', gap: 6, marginBottom: 8, marginTop: 2 }}>
+                    {p.precio_proveedor && (
+                      <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-elevated)', padding: '2px 7px', borderRadius: 4, border: '1px solid var(--border)' }}>
+                        Prov: {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(p.precio_proveedor)}
+                      </span>
+                    )}
+                    {p.precio_venta && (
+                      <span style={{ fontSize: 11, color: 'var(--accent)', background: 'var(--accent-dim)', padding: '2px 7px', borderRadius: 4, border: '1px solid var(--accent)', fontWeight: 600 }}>
+                        {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(p.precio_venta)}
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div className="product-footer">
-                  <span className="product-sku">{p.sku || p.dropi_id || '—'}</span>
+                  <span className="product-sku">{p.producto_id_dropi || p.sku || p.dropi_id || '—'}</span>
                   <div className="product-actions">
                     <button className="icon-btn" title="Ver detalle" onClick={() => setViewProduct(p)}>
                       <Eye size={13} />

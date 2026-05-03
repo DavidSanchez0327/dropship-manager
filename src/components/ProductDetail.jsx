@@ -71,6 +71,27 @@ export default function ProductDetail({ product, onClose, onEdit, onDelete }) {
                 <span className="detail-field-value">{product.provider}</span>
               </div>
 
+              {(product.precio_proveedor || product.precio_venta) && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, margin: '4px 0 8px' }}>
+                  {product.precio_proveedor && (
+                    <div style={{ background: 'var(--bg-elevated)', borderRadius: 8, padding: '10px 12px', border: '1px solid var(--border)' }}>
+                      <p style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.07em', color: 'var(--text-muted)', marginBottom: 4 }}>Precio proveedor</p>
+                      <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>
+                        {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(product.precio_proveedor)}
+                      </p>
+                    </div>
+                  )}
+                  {product.precio_venta && (
+                    <div style={{ background: 'var(--accent-dim)', borderRadius: 8, padding: '10px 12px', border: '1px solid var(--accent)' }}>
+                      <p style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.07em', color: 'var(--accent)', marginBottom: 4 }}>Precio venta</p>
+                      <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>
+                        {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(product.precio_venta)}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {product.sku && (
                 <div className="detail-field">
                   <span className="detail-field-label">SKU</span>
@@ -82,6 +103,13 @@ export default function ProductDetail({ product, onClose, onEdit, onDelete }) {
                 <div className="detail-field">
                   <span className="detail-field-label">ID en Dropi</span>
                   <code style={{ fontSize: 13, color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{product.dropi_id}</code>
+                </div>
+              )}
+
+              {product.producto_id_dropi && (
+                <div className="detail-field">
+                  <span className="detail-field-label">Producto ID Dropi</span>
+                  <code style={{ fontSize: 13, color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{product.producto_id_dropi}</code>
                 </div>
               )}
 

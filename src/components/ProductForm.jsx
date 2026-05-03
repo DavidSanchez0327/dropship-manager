@@ -19,6 +19,9 @@ const EMPTY = {
   sku: '',
   dropi_id: '',
   category: '',
+  precio_proveedor: '',
+  precio_venta: '',
+  producto_id_dropi: '',
   tags: [],
   images: [],
 }
@@ -167,6 +170,45 @@ export default function ProductForm({ product, onSave, onClose, loading }) {
                   value={form.dropi_id}
                   onChange={set('dropi_id')}
                   placeholder="ID del producto en Dropi"
+                />
+              </div>
+
+              {/* Precio proveedor */}
+              <div className="form-group">
+                <label className="form-label">Precio proveedor (COP)</label>
+                <input
+                  className="form-input"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={form.precio_proveedor}
+                  onChange={set('precio_proveedor')}
+                  placeholder="0"
+                />
+              </div>
+
+              {/* Precio venta */}
+              <div className="form-group">
+                <label className="form-label">Precio venta (COP)</label>
+                <input
+                  className="form-input"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={form.precio_venta}
+                  onChange={set('precio_venta')}
+                  placeholder="0"
+                />
+              </div>
+
+              {/* Producto ID Dropi */}
+              <div className="form-group full">
+                <label className="form-label">Producto ID Dropi</label>
+                <input
+                  className="form-input"
+                  value={form.producto_id_dropi}
+                  onChange={set('producto_id_dropi')}
+                  placeholder="Ej: PROD-123456"
                 />
               </div>
 

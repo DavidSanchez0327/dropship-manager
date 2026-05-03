@@ -29,9 +29,9 @@ const DROPSHIPPER = [
 ]
 
 const EMPTY_INPUT = {
-  provider: '', dropshipper: '', sku: '', 
+  provider: '', dropshipper: '', sku: '',
   dropi_id: '', dropi_link: '', raw_info: '',
-   images: ''
+  images: '', precio_proveedor: '', precio_venta: '', producto_id_dropi: '',
 }
 
 // Fases del flujo
@@ -146,15 +146,18 @@ export default function AIUploader() {
         : []
 
       setPreview({
-        title:       parsed.title       || '',
-        description: parsed.description || '',
-        category:    parsed.category    || '',
-        tags:        parsed.tags        || [],
-        provider:    inputForm.provider  || '',
-        dropshipper: inputForm.dropshipper|| '',
-        sku:         inputForm.sku       || '',
-        dropi_id:    inputForm.dropi_id  || '',
-        dropi_link:  inputForm.dropi_link|| '',
+        title:            parsed.title       || '',
+        description:      parsed.description || '',
+        category:         parsed.category    || '',
+        tags:             parsed.tags        || [],
+        provider:         inputForm.provider         || '',
+        dropshipper:      inputForm.dropshipper      || '',
+        sku:              inputForm.sku              || '',
+        dropi_id:         inputForm.dropi_id         || '',
+        dropi_link:       inputForm.dropi_link       || '',
+        precio_proveedor:  inputForm.precio_proveedor  ? parseFloat(inputForm.precio_proveedor) : null,
+        precio_venta:      inputForm.precio_venta      ? parseFloat(inputForm.precio_venta)     : null,
+        producto_id_dropi: inputForm.producto_id_dropi || '',
         images,
       })
       setPhase(PHASE.REVIEW)
@@ -295,8 +298,22 @@ export default function AIUploader() {
               </div>
             </div>
             <div className="form-group" style={{ marginBottom: 10 }}>
+              <label className="form-label">Producto ID Dropi</label>
+              <input className="form-input" value={inputForm.producto_id_dropi} onChange={setIn('producto_id_dropi')} placeholder="Ej: PROD-123456" />
+            </div>
+            <div className="form-group" style={{ marginBottom: 10 }}>
               <label className="form-label">Link del producto en Dropi</label>
               <input className="form-input" type="url" value={inputForm.dropi_link} onChange={setIn('dropi_link')} placeholder="https://dropi.co/producto/..." />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
+              <div className="form-group">
+                <label className="form-label">Precio proveedor (COP)</label>
+                <input className="form-input" type="number" min="0" step="1" value={inputForm.precio_proveedor} onChange={setIn('precio_proveedor')} placeholder="0" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Precio venta (COP)</label>
+                <input className="form-input" type="number" min="0" step="1" value={inputForm.precio_venta} onChange={setIn('precio_venta')} placeholder="0" />
+              </div>
             </div>
             <div className="form-group">
               <label className="form-label">URLs de imágenes (separadas por coma)</label>
@@ -454,11 +471,12 @@ export default function AIUploader() {
               <p style={{ ...secTitle, marginBottom: 0 }}>Datos de Dropi</p>
             </div>
             {[
-              ['Dropshipper', preview.dropshipper, false],
-              ['Proveedor',  preview.provider,   false],
-              ['SKU',        preview.sku,         true],
-              ['ID Dropi',   preview.dropi_id,    true],
-              ['Link Dropi', preview.dropi_link,  false],
+              ['Dropshipper',      preview.dropshipper,      false],
+              ['Proveedor',        preview.provider,         false],
+              ['SKU',              preview.sku,              true],
+              ['ID Dropi',         preview.dropi_id,         true],
+              ['Producto ID Dropi',preview.producto_id_dropi,true],
+              ['Link Dropi',       preview.dropi_link,       false],
             ].map(([label, value, mono]) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 8, gap: 12 }}>
                 <span style={{ color: 'var(--text-muted)', flexShrink: 0 }}>{label}</span>
@@ -467,6 +485,27 @@ export default function AIUploader() {
                 </span>
               </div>
             ))}
+
+            {(preview.precio_proveedor || preview.precio_venta) && (
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 10 }}>
+                {preview.precio_proveedor && (
+                  <div style={{ background: 'var(--bg)', borderRadius: 6, padding: '8px 10px', border: '1px solid var(--border)', textAlign: 'center' }}>
+                    <p style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 3 }}>Precio proveedor</p>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>
+                      {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(preview.precio_proveedor)}
+                    </p>
+                  </div>
+                )}
+                {preview.precio_venta && (
+                  <div style={{ background: 'var(--accent-dim)', borderRadius: 6, padding: '8px 10px', border: '1px solid var(--accent)', textAlign: 'center' }}>
+                    <p style={{ fontSize: 10, color: 'var(--accent)', marginBottom: 3 }}>Precio venta</p>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--accent)' }}>
+                      {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(preview.precio_venta)}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {preview.images?.length > 0 && (
               <>
